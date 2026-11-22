@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Logo LISTENING LAB phiên bản nền sáng">
+  <rect width="200" height="200" rx="44" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+  <path d="M40 94C40 58 69 30 104 30C139 30 168 58 168 94C168 130 139 158 104 158H72L42 176L49 144C43 130 40 112 40 94Z" stroke="#0D9488" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M76 20C84 14 94 11 104 11C114 11 124 14 132 20" stroke="#F97316" stroke-width="8" stroke-linecap="round"/>
+  <path d="M86 8C92 4 98 2.5 104 2.5C110 2.5 116 4 122 8" stroke="#F97316" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M56 96C56 69.5 77.5 48 104 48C130.5 48 152 69.5 152 96" stroke="#F97316" stroke-width="10" stroke-linecap="round"/>
+  <rect x="60" y="84" width="32" height="48" rx="16" stroke="#1E293B" stroke-width="10"/>
+  <path d="M76 98V118" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
+  <path d="M138 89C134 85 127 83 121 85.5C112 89 107 98.5 107 111C107 125 115 134 126 134C135.5 134 142 127.5 142 118C142 109.5 135.5 103.5 126.5 103.5C118 103.5 111.5 108 108.5 114" stroke="#1E293B" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
