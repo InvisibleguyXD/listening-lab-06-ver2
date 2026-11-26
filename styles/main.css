@@ -760,6 +760,88 @@ p { margin: 0; color: var(--muted-foreground); }
   font-weight: 700;
   padding: 1rem;
 }
+.gallery-img {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-block-end: 1px solid var(--border);
+}
+.gallery-dialog-img {
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: calc(100dvh - 12rem);
+  object-fit: contain;
+  border-radius: var(--radius);
+  background: var(--ink-deep);
+}
+.bts-video-card {
+  margin-block-start: 2rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  display: grid;
+  gap: 1rem;
+}
+.bts-video {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: calc(var(--radius) * 0.85);
+  background: var(--ink-deep);
+}
+.poster-real-wrap {
+  display: grid;
+  justify-items: center;
+  background: var(--ink-deep);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.poster-real-img {
+  inline-size: 100%;
+  block-size: auto;
+  max-block-size: min(32rem, calc(100dvh - 11rem));
+  object-fit: contain;
+}
+.poster-real-img--hero {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.video-stage-badge {
+  position: absolute;
+  inset-block-start: 0.85rem;
+  inset-inline-start: 0.85rem;
+  z-index: 2;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  background: rgb(15 23 42 / 0.85);
+  border: 1px solid rgb(249 115 22 / 0.6);
+  color: #FDBA74;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.profile-kv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1rem;
+}
+.consent-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  inline-size: fit-content;
+}
 .gallery-cap { padding: 1rem 1.2rem; display: grid; gap: 0.25rem; }
 .gallery-cap strong { font-family: var(--font-heading); color: var(--foreground); font-size: 0.96rem; }
 .gallery-cap span { font-size: 0.84rem; color: var(--muted-foreground); }

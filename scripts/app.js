@@ -121,28 +121,89 @@
     }));
   }
 
+  // Lazy-load video fallback for browsers without native <video loading="lazy">
+  function initLazyMediaFallback() {
+    if (Object.hasOwn(HTMLMediaElement.prototype, "loading")) return;
+    const lazyMedia = document.querySelectorAll('video[loading="lazy"]');
+    if (lazyMedia.length === 0 || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const media = entry.target;
+          if (media.dataset.poster) {
+            media.poster = media.dataset.poster;
+            delete media.dataset.poster;
+          }
+          if (media.dataset.preload) {
+            media.preload = media.dataset.preload;
+            delete media.dataset.preload;
+          }
+          for (const source of media.querySelectorAll("source[data-src]")) {
+            source.src = source.dataset.src;
+            delete source.dataset.src;
+          }
+          media.load();
+          observer.unobserve(media);
+        }
+      },
+      { rootMargin: "200px 0px" }
+    );
+
+    for (const media of lazyMedia) {
+      if (media.hasAttribute("poster")) {
+        media.dataset.poster = media.getAttribute("poster");
+        media.removeAttribute("poster");
+      }
+      if (media.hasAttribute("preload") && media.getAttribute("preload") !== "none") {
+        media.dataset.preload = media.getAttribute("preload");
+      }
+      media.preload = "none";
+      for (const source of media.querySelectorAll("source[src]")) {
+        source.dataset.src = source.getAttribute("src");
+        source.removeAttribute("src");
+      }
+      observer.observe(media);
+    }
+  }
+
   // Gallery & Poster Modal Triggers
   function initModals() {
     const gDialog = document.getElementById("gallery-dialog");
     if (gDialog) {
       const gTitle = document.getElementById("gallery-dialog-title");
-      const gStage = document.getElementById("gallery-dialog-stage");
+      const gImg = document.getElementById("gallery-dialog-img");
       const gDesc = document.getElementById("gallery-dialog-desc");
       document.querySelectorAll("[data-gallery-card]").forEach((btn) => {
         btn.addEventListener("click", () => {
           if (gTitle) gTitle.textContent = btn.dataset.title || "";
           if (gDesc) gDesc.textContent = btn.dataset.desc || "";
-          if (gStage) gStage.textContent = btn.dataset.slot || "Ảnh sắp cập nhật";
+          if (gImg && btn.dataset.img) {
+            gImg.src = btn.dataset.img;
+            gImg.alt = btn.dataset.title || "Ảnh hậu trường nhóm 06";
+          }
           gDialog.showModal();
         });
       });
     }
 
-    const pBtn = document.getElementById("poster-zoom-btn");
     const pDialog = document.getElementById("poster-dialog");
-    if (pBtn && pDialog) {
-      pBtn.addEventListener("click", () => pDialog.showModal());
-    }
+    const pImg = document.getElementById("poster-dialog-img");
+    const pTitle = document.getElementById("poster-dialog-title");
+    document.querySelectorAll("[data-poster-zoom]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (!pDialog) return;
+        if (pImg && btn.dataset.posterSrc) {
+          pImg.src = btn.dataset.posterSrc;
+          pImg.alt = btn.dataset.posterAlt || "Poster Chiến Thần Đọc Vị";
+        }
+        if (pTitle && btn.dataset.posterTitle) {
+          pTitle.textContent = btn.dataset.posterTitle;
+        }
+        pDialog.showModal();
+      });
+    });
   }
 
   // Copy & SVG/PNG Export
@@ -220,6 +281,7 @@
     initNavbar();
     initDialogs();
     initMotionControls();
+    initLazyMediaFallback();
     initModals();
     initExportsAndCopy();
   });
